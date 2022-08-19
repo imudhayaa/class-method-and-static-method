@@ -1,0 +1,65 @@
+class Course:     # class Name
+
+    course_status = "Approved for higher studies"
+    avail_clg = "govt clg"
+
+    def __init__(self,name,duration,fees,abbr):
+        self.name = name
+        self.duration = duration
+        self.fees = fees
+        self.abbr = abbr  
+        
+
+    def address(self):
+        addr = f"Course name : {self.name}\nduration = {self.duration}\nfees : {self.fees}\
+        \nexpansion : {self.abbr}"
+        return addr
+        
+    @classmethod
+    def chng_avail_clg(cls,clgs):
+        cls.avail_clg=clgs
+        
+        
+    @classmethod
+    def crs_data(cls,data):
+        name,duration,fees,abbr = data.split(",")
+        return cls(name,duration,fees,abbr)
+        
+        
+    @staticmethod 
+    def book(books):
+        avail_books = ['aptitude','GK']
+        if books in avail_books:
+            return True
+        return False
+        
+
+
+    def eligibility(self):  
+        if self.duration > 1:
+            return f'{self.name} is eligible for HS'
+        else:
+            return f'{self.name} is not eligiblefor HS'
+            
+
+
+crs1 = Course('MBBS',5,40000,"Bachelor of Medicine Bachelor of Surgery")
+crs2 = Course('BE',1,80000,"Bachelor of Engineering")
+crs3 = Course('BA',3,20000,"Bachelor of Arts")
+
+data = 'BL,3,20000,Bachelor of Law'
+crs4=Course.crs_data(data)
+
+Course.chng_avail_clg("private clg")
+
+Course.course_status = "Approved for higher studies"  
+crs2.course_status = " Not Approved for higher studies"  
+
+
+print(crs1.address())
+print(crs2.eligibility())
+print(crs3.course_status)
+print(crs1.avail_clg)
+print(crs4.abbr)
+print(crs4.book('GK'))
+print(crs2.book('c lang'))
